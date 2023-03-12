@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/gasto_cantidad2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad"
+        android:inputType="numberDecimal"
+        android:padding="16dp" />
+
+    <EditText
+        android:id="@+id/gasto_descripcion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripcion"
+        android:inputType="text"
+        android:padding="16dp" />
+
+    <Spinner
+        android:id="@+id/gasto_categorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/gasto_categorias_prompt"
+        android:entries="@array/gasto_categorias"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/gasto_f"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha"
+        android:inputType="text"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/gasto_agregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AGREGAR"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/gasto_cancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:padding="16dp" />
+
+</LinearLayout>
