@@ -12,9 +12,9 @@
 package io.swagger.client.apis
 
 import io.swagger.client.models.BooleanResponse
-import io.swagger.client.models.GastoDescription
-import io.swagger.client.models.GastoDescriptionListResponse
-import io.swagger.client.models.GastoDescriptionResponse
+import io.swagger.client.models.GastoDto
+import io.swagger.client.models.GastoDtoListResponse
+import io.swagger.client.models.GastoDtoResponse
 
 import io.swagger.client.infrastructure.*
 
@@ -23,21 +23,20 @@ class GastoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
     /**
      * 
      * 
-     * @return GastoDescriptionListResponse
+     * @return GastoDtoListResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiGastoDescriptionGet(): GastoDescriptionListResponse {
-        
+    fun apiGastoDescriptionGet(): GastoDtoListResponse {
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/GastoDescription"
         )
-        val response = request<GastoDescriptionListResponse>(
+        val response = request<GastoDtoListResponse>(
                 localVariableConfig
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as GastoDescriptionListResponse
+            ResponseType.Success -> (response as Success<*>).data as GastoDtoListResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -52,7 +51,6 @@ class GastoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      */
     @Suppress("UNCHECKED_CAST")
     fun apiGastoDescriptionIdDelete(id: kotlin.Int): BooleanResponse {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
                 "/api/GastoDescription/{id}".replace("{" + "id" + "}", "$id")
@@ -73,21 +71,20 @@ class GastoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      * 
      * 
      * @param id  
-     * @return GastoDescriptionResponse
+     * @return GastoDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiGastoDescriptionIdGet(id: kotlin.Int): GastoDescriptionResponse {
-        
+    fun apiGastoDescriptionIdGet(id: kotlin.Int): GastoDtoResponse {
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/GastoDescription/{id}".replace("{" + "id" + "}", "$id")
         )
-        val response = request<GastoDescriptionResponse>(
+        val response = request<GastoDtoResponse>(
                 localVariableConfig
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as GastoDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as GastoDtoResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -98,22 +95,21 @@ class GastoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      * 
      * 
      * @param body  (optional)
-     * @return GastoDescriptionResponse
+     * @return GastoDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiGastoDescriptionPost(body: GastoDescription? = null): GastoDescriptionResponse {
+    fun apiGastoDescriptionPost(body: GastoDto? = null): GastoDtoResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.POST,
                 "/api/GastoDescription"
         )
-        val response = request<GastoDescriptionResponse>(
+        val response = request<GastoDtoResponse>(
                 localVariableConfig, localVariableBody
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as GastoDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as GastoDtoResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -124,22 +120,45 @@ class GastoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      * 
      * 
      * @param body  (optional)
-     * @return GastoDescriptionResponse
+     * @return GastoDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiGastoDescriptionPut(body: GastoDescription? = null): GastoDescriptionResponse {
+    fun apiGastoDescriptionPut(body: GastoDto? = null): GastoDtoResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
                 "/api/GastoDescription"
         )
-        val response = request<GastoDescriptionResponse>(
+        val response = request<GastoDtoResponse>(
                 localVariableConfig, localVariableBody
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as GastoDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as GastoDtoResponse
+            ResponseType.Informational -> TODO()
+            ResponseType.Redirection -> TODO()
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+        }
+    }
+    /**
+     * 
+     * 
+     * @param usuarioId  
+     * @return GastoDtoListResponse
+     */
+    @Suppress("UNCHECKED_CAST")
+    fun apiGastoDescriptionUsuarioUsuarioIdGet(usuarioId: kotlin.Int): GastoDtoListResponse {
+        val localVariableConfig = RequestConfig(
+                RequestMethod.GET,
+                "/api/GastoDescription/usuario/{usuarioId}".replace("{" + "usuarioId" + "}", "$usuarioId")
+        )
+        val response = request<GastoDtoListResponse>(
+                localVariableConfig
+        )
+
+        return when (response.responseType) {
+            ResponseType.Success -> (response as Success<*>).data as GastoDtoListResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")

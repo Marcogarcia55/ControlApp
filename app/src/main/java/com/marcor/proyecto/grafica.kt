@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
@@ -50,9 +52,16 @@ class grafica : Fragment() {
             findNavController().navigate(R.id.action_grafica_to_export, null, NavOptions.Builder().setPopUpTo(R.id.gastos2, false).build())
 
         }
-
+    
         pieChart = view.findViewById(R.id.pie_chart)
-
+        
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val result2 = ingresos
+                setFragmentResult("requestKeyIN", bundleOf("bundleKeyIN" to result2))
+                findNavController().navigateUp()
+            }
+        })
         return view
     }
 
@@ -72,4 +81,7 @@ class grafica : Fragment() {
 
         pieChart.invalidate()
     }
+    
+    
+    
 }

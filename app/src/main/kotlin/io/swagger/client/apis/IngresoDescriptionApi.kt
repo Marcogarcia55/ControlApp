@@ -12,9 +12,9 @@
 package io.swagger.client.apis
 
 import io.swagger.client.models.BooleanResponse
-import io.swagger.client.models.IngresosDescription
-import io.swagger.client.models.IngresosDescriptionListResponse
-import io.swagger.client.models.IngresosDescriptionResponse
+import io.swagger.client.models.IngresosDto
+import io.swagger.client.models.IngresosDtoListResponse
+import io.swagger.client.models.IngresosDtoResponse
 
 import io.swagger.client.infrastructure.*
 
@@ -23,21 +23,20 @@ class IngresoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
     /**
      * 
      * 
-     * @return IngresosDescriptionListResponse
+     * @return IngresosDtoListResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiIngresoDescriptionGet(): IngresosDescriptionListResponse {
-        
+    fun apiIngresoDescriptionGet(): IngresosDtoListResponse {
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/IngresoDescription"
         )
-        val response = request<IngresosDescriptionListResponse>(
+        val response = request<IngresosDtoListResponse>(
                 localVariableConfig
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as IngresosDescriptionListResponse
+            ResponseType.Success -> (response as Success<*>).data as IngresosDtoListResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -52,7 +51,6 @@ class IngresoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      */
     @Suppress("UNCHECKED_CAST")
     fun apiIngresoDescriptionIdDelete(id: kotlin.Int): BooleanResponse {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
                 "/api/IngresoDescription/{id}".replace("{" + "id" + "}", "$id")
@@ -73,21 +71,20 @@ class IngresoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      * 
      * 
      * @param id  
-     * @return IngresosDescriptionResponse
+     * @return IngresosDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiIngresoDescriptionIdGet(id: kotlin.Int): IngresosDescriptionResponse {
-        
+    fun apiIngresoDescriptionIdGet(id: kotlin.Int): IngresosDtoResponse {
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/IngresoDescription/{id}".replace("{" + "id" + "}", "$id")
         )
-        val response = request<IngresosDescriptionResponse>(
+        val response = request<IngresosDtoResponse>(
                 localVariableConfig
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as IngresosDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as IngresosDtoResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -98,22 +95,21 @@ class IngresoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      * 
      * 
      * @param body  (optional)
-     * @return IngresosDescriptionResponse
+     * @return IngresosDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiIngresoDescriptionPost(body: IngresosDescription? = null): IngresosDescriptionResponse {
+    fun apiIngresoDescriptionPost(body: IngresosDto? = null): IngresosDtoResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.POST,
                 "/api/IngresoDescription"
         )
-        val response = request<IngresosDescriptionResponse>(
+        val response = request<IngresosDtoResponse>(
                 localVariableConfig, localVariableBody
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as IngresosDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as IngresosDtoResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -124,22 +120,45 @@ class IngresoDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      * 
      * 
      * @param body  (optional)
-     * @return IngresosDescriptionResponse
+     * @return IngresosDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiIngresoDescriptionPut(body: IngresosDescription? = null): IngresosDescriptionResponse {
+    fun apiIngresoDescriptionPut(body: IngresosDto? = null): IngresosDtoResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
                 "/api/IngresoDescription"
         )
-        val response = request<IngresosDescriptionResponse>(
+        val response = request<IngresosDtoResponse>(
                 localVariableConfig, localVariableBody
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as IngresosDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as IngresosDtoResponse
+            ResponseType.Informational -> TODO()
+            ResponseType.Redirection -> TODO()
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+        }
+    }
+    /**
+     * 
+     * 
+     * @param usuarioId  
+     * @return IngresosDtoListResponse
+     */
+    @Suppress("UNCHECKED_CAST")
+    fun apiIngresoDescriptionUsuarioUsuarioIdGet(usuarioId: kotlin.Int): IngresosDtoListResponse {
+        val localVariableConfig = RequestConfig(
+                RequestMethod.GET,
+                "/api/IngresoDescription/usuario/{usuarioId}".replace("{" + "usuarioId" + "}", "$usuarioId")
+        )
+        val response = request<IngresosDtoListResponse>(
+                localVariableConfig
+        )
+
+        return when (response.responseType) {
+            ResponseType.Success -> (response as Success<*>).data as IngresosDtoListResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")

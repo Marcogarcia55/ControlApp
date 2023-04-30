@@ -41,6 +41,8 @@
         android:id="@+id/gasto_agregar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
+
         android:text="AGREGAR"
         android:padding="16dp" />
 
@@ -48,6 +50,8 @@
         android:id="@+id/gasto_cancelar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
+        android:layout_marginTop="15dp"
         android:text="Cancelar"
         android:padding="16dp" />
 

@@ -27,7 +27,6 @@ class DireccionDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePat
      */
     @Suppress("UNCHECKED_CAST")
     fun apiDireccionDescriptionGet(): DireccionDescriptionListResponse {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/DireccionDescription"
@@ -52,7 +51,6 @@ class DireccionDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePat
      */
     @Suppress("UNCHECKED_CAST")
     fun apiDireccionDescriptionIdDelete(id: kotlin.Int): BooleanResponse {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
                 "/api/DireccionDescription/{id}".replace("{" + "id" + "}", "$id")
@@ -77,7 +75,6 @@ class DireccionDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePat
      */
     @Suppress("UNCHECKED_CAST")
     fun apiDireccionDescriptionIdGet(id: kotlin.Int): DireccionDescriptionResponse {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/DireccionDescription/{id}".replace("{" + "id" + "}", "$id")
@@ -103,7 +100,6 @@ class DireccionDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePat
     @Suppress("UNCHECKED_CAST")
     fun apiDireccionDescriptionPost(body: DireccionDescription? = null): DireccionDescriptionResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.POST,
                 "/api/DireccionDescription"
@@ -129,7 +125,6 @@ class DireccionDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePat
     @Suppress("UNCHECKED_CAST")
     fun apiDireccionDescriptionPut(body: DireccionDescription? = null): DireccionDescriptionResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
                 "/api/DireccionDescription"

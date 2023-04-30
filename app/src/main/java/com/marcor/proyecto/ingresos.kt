@@ -1,18 +1,13 @@
 package com.marcor.proyecto
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -22,6 +17,13 @@ import androidx.navigation.fragment.findNavController
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
+import io.swagger.client.apis.UsuarioDescriptionApi
+import io.swagger.client.models.UsuarioDto2
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,54 +34,86 @@ class ingresos : Fragment() {
     private lateinit var ingresosList: ListView
     private lateinit var ingresosAdapter: ArrayAdapter<String>
     private lateinit var ingresosArrayList: ArrayList<String>
+
     private lateinit var ingresosViewModel: IngresosViewModel
     private lateinit var gastosViewModel: GastosViewModel
-    val ingresosList2 = ArrayList<String>()
-    val url = "http://192.168.1.6:7064/api/IngresoDescription"
-    var suma: Double = 0.0
+    val baseUrl = ApiService.getBaseUrl()
+    val baseUrl2 = ApiService.getBaseUrl2()
 
+    val ingresosList2 = ArrayList<String>()
+    val url = "$baseUrl/IngresoDescription"
+
+     // ejemplo de id de usuario
+
+    // ejemplo de id de usuario
+
+    var suma: Double = 0.0
+    var idCantidad2 = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         val view = inflater.inflate(R.layout.fragment_ingresos, container, false)
         ingresosViewModel = ViewModelProvider(this).get(IngresosViewModel::class.java)
         gastosViewModel = ViewModelProvider(this).get(GastosViewModel::class.java)
 
         val agregarButton = view.findViewById<Button>(R.id.ingresar_gastos_button)
+        val imagen = view.findViewById<ImageView>(R.id.imageP)
+
         val pasarButton = view.findViewById<Button>(R.id.pasarFragment)
+
 
 
         ingresosList = view.findViewById(R.id.ingresos_listview)
 
+        val activity = requireActivity() as MainActivity
+        val id = activity.obtenerId()
+        val ima = activity.obtenerImage()
 
+
+        val api2 = UsuarioDescriptionApi(baseUrl2)
+        GlobalScope.launch {
+            val response = api2.apiUsuarioDescriptionIdGet(id.toInt())
+            withContext(Dispatchers.Main) {
+                response.data?.id.toString()
+                Picasso.get().load(response.data?.imagePath.toString()).into(imagen)
+
+            }
+        }
+
+
+        val url2 = "$baseUrl/IngresoDescription/usuario/$id"
+        print(url2)
         val queue = Volley.newRequestQueue(requireContext())
         ingresosList2.clear()
         suma = 0.0
-        // Realizar una solicitud GET a la API utilizando JsonObjectRequest
+
+
 
         val request = JsonObjectRequest(
             Request.Method.GET,
-            url,
+            url2,
             null,
             { response ->
                 // Manejar la respuesta exitosa
                 val jsonArray = response.getJSONArray("data")
 
                 for (i in 0 until jsonArray.length()) {
-                    val ingreso = jsonArray.getJSONObject(i)
-                    val cantidad = ingreso.getDouble("cantidad").toString()
-                    val descripcion = ingreso.getString("descripcion")
-                    val fecha = ingreso.getString("fecha")
-                    suma += cantidad.toDouble()
+                        val ingreso = jsonArray.getJSONObject(i)
+                        val idCantidad = ingreso.getInt("id").toString()
+                        val cantidad = ingreso.getDouble("cantidad").toString()
+                        val descripcion = ingreso.getString("descripcion")
+                        val fecha = ingreso.getString("fecha")
+                        suma += cantidad.toDouble()
 
-                    val ingresoString = "$cantidad - $descripcion - ($fecha)"
+                        val ingresoString = "$idCantidad - $cantidad - $descripcion - $fecha"
 
-                    ingresosList2.add(ingresoString)
-
+                        ingresosList2.add(ingresoString)
                 }
-                println("Ingresos: ${ingresosList2} suma: $suma")
+                println("Ingresos: ${ingresosList2}")
 
                 ingresosViewModel.suma = suma
                 ingresosArrayList = ingresosList2
@@ -97,6 +131,7 @@ class ingresos : Fragment() {
         )
 
         queue.add(request)
+
 
 
 
@@ -126,13 +161,12 @@ class ingresos : Fragment() {
             val descripcion = data.getStringExtra("descripcion")
             val fecha = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date())
 
+            val activity2 = requireActivity() as MainActivity
+            val id2 = activity2.obtenerId()
 
-            val ingresoString = "$cantidad - $descripcion - ($fecha)"
-            ingresosArrayList.add(ingresoString)
-            ingresosAdapter.notifyDataSetChanged()
 
             ingresosViewModel.suma += cantidad
-            ingresosViewModel.ingresosList = ingresosArrayList
+
 
 
             val sumaT = view?.findViewById<TextView>(R.id.txt_suma)
@@ -141,14 +175,10 @@ class ingresos : Fragment() {
             val queue = Volley.newRequestQueue(requireContext())
 
 
+
             val jsonBody = JSONObject()
-            jsonBody.put("isDeleted", false)
-            jsonBody.put("createdBy", "John Doe")
-            jsonBody.put("createdDate", "2022-03-10")
-            jsonBody.put("updateBy", "Jane Smith")
-            jsonBody.put("updateDate", "2022-03-11")
+            jsonBody.put("idUsuario", id2)
             jsonBody.put("cantidad", cantidad)
-            jsonBody.put("suma", ingresosViewModel.suma)
             jsonBody.put("descripcion", descripcion)
             jsonBody.put("fecha", fecha)
 
@@ -157,13 +187,13 @@ class ingresos : Fragment() {
                 url,
                 jsonBody,
                 { response ->
-                    // Manejar la respuesta exitosa
-                    val ingreso = response.getJSONObject("data")
-                    val cantidad = ingreso.getInt("cantidad").toString()
-                    val descripcion = ingreso.getString("descripcion")
-                    val fecha = ingreso.getString("fecha")
-                    val ingresoString = "$cantidad - $descripcion - $fecha"
-                    println("Ingreso creado: $ingresoString")
+                    val jsonObject = response.getJSONObject("data")
+                    val idCantidad = jsonObject.getInt("id")
+                    ingresosViewModel.ingresosList = ingresosArrayList
+                    val ingresoString = "$idCantidad - $cantidad - $descripcion - $fecha"
+                    ingresosArrayList.add(ingresoString)
+                    ingresosAdapter.notifyDataSetChanged()
+
                 },
                 { error ->
                     // Manejar el error
@@ -176,8 +206,22 @@ class ingresos : Fragment() {
 
             queue.add(request)
 
+            val api = UsuarioDescriptionApi(baseUrl2)
+            GlobalScope.launch(Dispatchers.IO) {
+                // construye un nuevo objeto GastoDto para agregar
+                val newUser = UsuarioDto2(
+                    id = id2.toInt(),
+                    total = ingresosViewModel.suma.toDouble()
+                )
+                // realiza la solicitud POST
+                val postResponse = api.apiUsuarioDescriptionUpdate2Put(newUser)
 
-        }
+                // accede a los datos que devuelve la respuesta
+
+            }
+
+
+            }
 
     }
 

@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/gray_500"
+    android:background="@drawable/background_page"
     tools:context=".gastos">
 
+    <ImageView
+        android:id="@+id/imagePl"
+        android:layout_width="150px"
+        android:layout_height="150px"
+        android:layout_gravity="center"/>
     <TextView
         android:id="@+id/txt_suma2"
         android:layout_width="match_parent"
@@ -27,6 +32,8 @@
         android:id="@+id/pasarGrafica"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
+
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -36,6 +43,8 @@
         android:id="@+id/ingresar_gastos_button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
+
         android:text="Agregar Gasto"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"

@@ -44,5 +44,9 @@
         android:id="@+id/export"
         android:name="com.marcor.proyecto.export"
         android:label="fragment_export"
-        tools:layout="@layout/fragment_export" />
+        tools:layout="@layout/fragment_export" >
+        <action
+            android:id="@+id/action_export_to_grafica"
+            app:destination="@id/grafica" />
+    </fragment>
 </navigation>

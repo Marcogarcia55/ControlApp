@@ -15,25 +15,17 @@ package io.swagger.client.models
 /**
  * 
  * @param id 
- * @param isDeleted 
- * @param createdBy 
- * @param createdDate 
- * @param updateBy 
- * @param updateDate 
  * @param name 
  * @param password 
- * @param telefono 
+ * @param total 
+ * @param imagePath 
  */
-data class UsuarioDescription (
+data class UsuarioDto (
 
     val id: kotlin.Int? = null,
-    val isDeleted: kotlin.Boolean? = null,
-    val createdBy: kotlin.String? = null,
-    val createdDate: kotlin.String? = null,
-    val updateBy: kotlin.String? = null,
-    val updateDate: kotlin.String? = null,
     val name: kotlin.String? = null,
     val password: kotlin.String? = null,
-    val telefono: kotlin.String? = null
+    val total: kotlin.Double? = null,
+    val imagePath: kotlin.String? = null
 ) {
 }

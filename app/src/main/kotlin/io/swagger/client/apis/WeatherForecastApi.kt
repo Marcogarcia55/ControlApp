@@ -24,7 +24,6 @@ class WeatherForecastApi(basePath: kotlin.String = "/") : ApiClient(basePath) {
      */
     @Suppress("UNCHECKED_CAST")
     fun getWeatherForecast(): kotlin.Array<WeatherForecast> {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/WeatherForecast"

@@ -11,7 +11,7 @@
  */
 package io.swagger.client.models
 
-import io.swagger.client.models.GastoDescription
+import io.swagger.client.models.UsuarioDto2
 
 /**
  * 
@@ -19,9 +19,9 @@ import io.swagger.client.models.GastoDescription
  * @param message 
  * @param errors 
  */
-data class GastoDescriptionListResponse (
+data class UsuarioDto2Response (
 
-    val `data`: kotlin.Array<GastoDescription>? = null,
+    val `data`: UsuarioDto2? = null,
     val message: kotlin.String? = null,
     val errors: kotlin.Array<kotlin.String>? = null
 ) {

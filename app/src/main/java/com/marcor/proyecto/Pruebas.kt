@@ -1,7 +1,6 @@
 package com.marcor.proyecto
 
 import io.swagger.client.apis.UsuarioDescriptionApi
-import io.swagger.client.models.UsuarioDescription
 
 
 fun main() {

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+
     android:padding="16dp">
 
     <EditText
@@ -31,15 +32,8 @@
         android:id="@+id/gasto_guardar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
         android:text="GUARDAR"
-        android:padding="16dp" />
-
-
-    <Button
-        android:id="@+id/gasto_cancelar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
         android:padding="16dp" />
 
 

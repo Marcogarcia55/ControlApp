@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,17 +18,31 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-
         <activity
-            android:name=".Login"
+            android:name=".signup"
+            android:windowSoftInputMode="adjustResize"
+
             android:exported="false" />
         <activity
-            android:name=".Noty"
+            android:name=".Login"
+            android:windowSoftInputMode="adjustResize"
+
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize"
+
+            android:exported="false" />
+        <activity
+            android:name=".Noty"
+            android:windowSoftInputMode="adjustResize"
+
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

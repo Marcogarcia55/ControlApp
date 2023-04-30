@@ -15,25 +15,16 @@ package io.swagger.client.models
 /**
  * 
  * @param id 
- * @param isDeleted 
- * @param createdBy 
- * @param createdDate 
- * @param updateBy 
- * @param updateDate 
+ * @param idUsuario 
  * @param cantidad 
  * @param descripcion 
  * @param fecha 
  */
-data class IngresosDescription (
+data class IngresosDto (
 
     val id: kotlin.Int? = null,
-    val isDeleted: kotlin.Boolean? = null,
-    val createdBy: kotlin.String? = null,
-    val createdDate: kotlin.String? = null,
-    val updateBy: kotlin.String? = null,
-    val updateDate: kotlin.String? = null,
-    val cantidad: kotlin.Float? = null,
-    val suma: kotlin.Float? = null,
+    val idUsuario: kotlin.Int? = null,
+    val cantidad: kotlin.Double? = null,
     val descripcion: kotlin.String? = null,
     val fecha: kotlin.String? = null
 ) {

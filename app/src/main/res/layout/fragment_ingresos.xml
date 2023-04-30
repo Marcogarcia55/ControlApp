@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container_view_ingresos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_intro"
     android:orientation="vertical">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/imageP"
+        android:layout_width="150px"
+        android:layout_height="150px"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/txt_suma"
         android:layout_width="match_parent"
@@ -16,6 +27,7 @@
         android:id="@+id/pasarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -25,6 +37,8 @@
         android:id="@+id/ingresar_gastos_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
+
         android:text="Agregar Ingreso"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
@@ -65,6 +79,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    </LinearLayout>
 
-
-</LinearLayout>
+</FrameLayout>

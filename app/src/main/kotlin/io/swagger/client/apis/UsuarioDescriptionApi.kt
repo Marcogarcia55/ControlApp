@@ -12,9 +12,11 @@
 package io.swagger.client.apis
 
 import io.swagger.client.models.BooleanResponse
-import io.swagger.client.models.UsuarioDescription
-import io.swagger.client.models.UsuarioDescriptionListResponse
-import io.swagger.client.models.UsuarioDescriptionResponse
+import io.swagger.client.models.UsuarioDto
+import io.swagger.client.models.UsuarioDto2
+import io.swagger.client.models.UsuarioDto2Response
+import io.swagger.client.models.UsuarioDtoListResponse
+import io.swagger.client.models.UsuarioDtoResponse
 
 import io.swagger.client.infrastructure.*
 
@@ -23,21 +25,20 @@ class UsuarioDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
     /**
      * 
      * 
-     * @return UsuarioDescriptionListResponse
+     * @return UsuarioDtoListResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiUsuarioDescriptionGet(): UsuarioDescriptionListResponse {
-        
+    fun apiUsuarioDescriptionGet(): UsuarioDtoListResponse {
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/UsuarioDescription"
         )
-        val response = request<UsuarioDescriptionListResponse>(
+        val response = request<UsuarioDtoListResponse>(
                 localVariableConfig
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as UsuarioDescriptionListResponse
+            ResponseType.Success -> (response as Success<*>).data as UsuarioDtoListResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -52,7 +53,6 @@ class UsuarioDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      */
     @Suppress("UNCHECKED_CAST")
     fun apiUsuarioDescriptionIdDelete(id: kotlin.Int): BooleanResponse {
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.DELETE,
                 "/api/UsuarioDescription/{id}".replace("{" + "id" + "}", "$id")
@@ -73,21 +73,20 @@ class UsuarioDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      * 
      * 
      * @param id  
-     * @return UsuarioDescriptionResponse
+     * @return UsuarioDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiUsuarioDescriptionIdGet(id: kotlin.Int): UsuarioDescriptionResponse {
-        
+    fun apiUsuarioDescriptionIdGet(id: kotlin.Int): UsuarioDtoResponse {
         val localVariableConfig = RequestConfig(
                 RequestMethod.GET,
                 "/api/UsuarioDescription/{id}".replace("{" + "id" + "}", "$id")
         )
-        val response = request<UsuarioDescriptionResponse>(
+        val response = request<UsuarioDtoResponse>(
                 localVariableConfig
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as UsuarioDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as UsuarioDtoResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -98,22 +97,21 @@ class UsuarioDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      * 
      * 
      * @param body  (optional)
-     * @return UsuarioDescriptionResponse
+     * @return UsuarioDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiUsuarioDescriptionPost(body: UsuarioDescription? = null): UsuarioDescriptionResponse {
+    fun apiUsuarioDescriptionPost(body: UsuarioDto? = null): UsuarioDtoResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.POST,
                 "/api/UsuarioDescription"
         )
-        val response = request<UsuarioDescriptionResponse>(
+        val response = request<UsuarioDtoResponse>(
                 localVariableConfig, localVariableBody
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as UsuarioDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as UsuarioDtoResponse
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
@@ -124,22 +122,46 @@ class UsuarioDescriptionApi(basePath: kotlin.String = "/") : ApiClient(basePath)
      * 
      * 
      * @param body  (optional)
-     * @return UsuarioDescriptionResponse
+     * @return UsuarioDtoResponse
      */
     @Suppress("UNCHECKED_CAST")
-    fun apiUsuarioDescriptionPut(body: UsuarioDescription? = null): UsuarioDescriptionResponse {
+    fun apiUsuarioDescriptionPut(body: UsuarioDto? = null): UsuarioDtoResponse {
         val localVariableBody: kotlin.Any? = body
-        
         val localVariableConfig = RequestConfig(
                 RequestMethod.PUT,
                 "/api/UsuarioDescription"
         )
-        val response = request<UsuarioDescriptionResponse>(
+        val response = request<UsuarioDtoResponse>(
                 localVariableConfig, localVariableBody
         )
 
         return when (response.responseType) {
-            ResponseType.Success -> (response as Success<*>).data as UsuarioDescriptionResponse
+            ResponseType.Success -> (response as Success<*>).data as UsuarioDtoResponse
+            ResponseType.Informational -> TODO()
+            ResponseType.Redirection -> TODO()
+            ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")
+            ResponseType.ServerError -> throw ServerException((response as ServerError<*>).message ?: "Server error")
+        }
+    }
+    /**
+     * 
+     * 
+     * @param body  (optional)
+     * @return UsuarioDto2Response
+     */
+    @Suppress("UNCHECKED_CAST")
+    fun apiUsuarioDescriptionUpdate2Put(body: UsuarioDto2? = null): UsuarioDto2Response {
+        val localVariableBody: kotlin.Any? = body
+        val localVariableConfig = RequestConfig(
+                RequestMethod.PUT,
+                "/api/UsuarioDescription/update2"
+        )
+        val response = request<UsuarioDto2Response>(
+                localVariableConfig, localVariableBody
+        )
+
+        return when (response.responseType) {
+            ResponseType.Success -> (response as Success<*>).data as UsuarioDto2Response
             ResponseType.Informational -> TODO()
             ResponseType.Redirection -> TODO()
             ResponseType.ClientError -> throw ClientException((response as ClientError<*>).body as? String ?: "Client error")

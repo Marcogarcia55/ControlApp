@@ -1,23 +1,16 @@
 package com.marcor.proyecto
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.google.gson.Gson
-import io.swagger.client.apis.UsuarioDescriptionApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import com.android.volley.Response
@@ -26,23 +19,29 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Login : AppCompatActivity() {
 
+    val baseUrl = ApiService.getBaseUrl()
 
-    private var isRestarted: Boolean = false
+    val url = "$baseUrl/UsuarioDescription"
+
+    val usuariosList = ArrayList<String>()
+    var idUsuario = 0
+    var nameUser = ""
+    var EXTRA_ID = "EXTRA_ID"
+    var EXTRA_NAME = "EXTRA_NAME"
+    var imagen = ""
+
     companion object {
-        const val usuario1 = "marco"
-        const val password1 = "12345"
-
-        const val usuario2 = "jair"
-        const val password2 = "jair"
-
-        const val usuario3 = "javier"
-        const val password3 = "javier"
+        data class Usuario(val id: Int, val nombre: String, val contraseña: String)
+        val usuarios = mutableMapOf<String, Usuario>()
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        print(url)
         val loginButton = findViewById<Button>(R.id.button_login)
         val txtUser = findViewById<EditText>(R.id.txt_User)
         val txtPass = findViewById<EditText>(R.id.txt_Password)
@@ -51,7 +50,6 @@ class Login : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
 
         // Realizar una solicitud GET a la API utilizando JsonObjectRequest
-        val url = "https://2595-2806-2f0-6020-233f-2095-6665-8c29-ba0d.ngrok.io/api/IngresoDescription"
         val request = JsonObjectRequest(
             Request.Method.GET,
             url,
@@ -59,16 +57,25 @@ class Login : AppCompatActivity() {
             { response ->
                 // Manejar la respuesta exitosa
                 val jsonArray = response.getJSONArray("data")
-                val ingresosList = ArrayList<String>()
                 for (i in 0 until jsonArray.length()) {
-                    val ingreso = jsonArray.getJSONObject(i)
-                    val cantidad = ingreso.getInt("cantidad").toString()
-                    val descripcion = ingreso.getString("descripcion")
-                    val fecha = ingreso.getString("fecha")
-                    val ingresoString = "$cantidad - $descripcion - $fecha"
-                    ingresosList.add(ingresoString)
+                    val usuariosApi = jsonArray.getJSONObject(i)
+                    idUsuario = usuariosApi.getInt("id")
+                    val name = usuariosApi.getString("name").toString()
+                    val password = usuariosApi.getString("password")
+                    val total = usuariosApi.getDouble("total")
+                    imagen = usuariosApi.getString("imagePath")
+
+                    val usuariosString = "$idUsuario - $name - $password - $total"
+                    usuariosList.add(usuariosString)
+                    val nuevoUsuario = Usuario(idUsuario, name, password)
+                    usuarios[nuevoUsuario.nombre] = nuevoUsuario
+
+
                 }
-                println("Ingresos: ${ingresosList}")
+                println("usuarios: ${usuariosList}")
+
+
+
             },
             { error ->
                 // Manejar el error
@@ -92,54 +99,37 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            when {
-                user == usuario1 && pass == password1 -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-
-                    startActivity(intent)
-                    val textEdit = txtUser
-                    textEdit.setText("")
-                    textEdit.requestFocus()
-
-                    val pas = txtPass
-                    pas.setText("")
-                    onStop()
-
+            if (usuarios[user]?.contraseña == pass) {
+                // Si el usuario y la contraseña son correctos, redirigir al usuario a la actividad principal
+                val usuario = Login.Companion.Usuario(idUsuario, user, pass)
+                nameUser = usuarios[user]?.nombre.toString()
+                // Pasar el usuarioViewModel a la actividad principal
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra(EXTRA_ID, usuarios[user]?.id.toString())
+                    putExtra("nombre", usuarios[user]?.nombre.toString())
+                    putExtra("pass", usuarios[user]?.contraseña.toString())
+                    putExtra("image", imagen.toString())
                 }
-                user == usuario2 && pass == password2 -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-
-                    startActivity(intent)
-                    val textEdit = txtUser
-                    textEdit.setText("")
-                    textEdit.requestFocus()
-
-                    val pas = txtPass
-                    pas.setText("")
-                }
-                user == usuario3 && pass == password3 -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-
-                    startActivity(intent)
-                    val textEdit = txtUser
-                    textEdit.setText("")
-                    textEdit.requestFocus()
-
-                    val pas = txtPass
-                    pas.setText("")
-                }
-                else -> {
-                    Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-                }
+                startActivity(intent)
+            } else {
+                // Si el usuario y la contraseña son incorrectos, mostrar un mensaje de error
+                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
             }
         }
 
 
+
     }
 
-
+    fun obtenerName(): String {
+        return nameUser
+    }
+    override fun onResume() {
+        super.onResume()
+        val txtUser = findViewById<EditText>(R.id.txt_User)
+        val txtPass = findViewById<EditText>(R.id.txt_Password)
+        txtUser.setText("")
+        txtPass.setText("")
+    }
 
 }

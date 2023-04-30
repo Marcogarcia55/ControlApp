@@ -4,5 +4,6 @@ import androidx.lifecycle.ViewModel
 class IngresosViewModel : ViewModel() {
     var ingresosList: ArrayList<String> = ArrayList()
     var suma: Double = 0.0
+    var imagePath: String = ""
 }
 

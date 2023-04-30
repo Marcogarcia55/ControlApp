@@ -41,14 +41,8 @@
         android:id="@+id/btn_guardar_gasto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_iniciar"
         android:text="GUARDAR"
-        android:padding="16dp" />
-
-    <Button
-        android:id="@+id/btn_cancelar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CANCELAR"
         android:padding="16dp" />
 
 </LinearLayout>
